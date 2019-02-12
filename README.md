@@ -1,6 +1,6 @@
 # Probabilistic Hessian Estimation
 
-This is a scipy-inspired implementation of the Hessian-inference algorithm presented in the paper [Active Probabilistic Inference on Matrices for Pre-Conditioning in Stochastic Optimization][1]
+This is a scipy-inspired implementation of the Hessian-inference algorithm presented in the paper [Active Probabilistic Inference on Matrices for Pre-Conditioning in Stochastic Optimization][article]
 
 
 
@@ -20,7 +20,7 @@ The ``Probabilistic_Hessian`` module contains the function ``Estimate_Hessian`` 
 ```python
 # (1) With handles
 import numpy as np
-from ProbabilisticHessian import Estimate_Hessian
+from probabilistic_hessian import Estimate_Hessian
 from scipy.optimize import rosen_der,rosen_hess_prod
 
 x0=np.random.randn(5)
@@ -31,7 +31,7 @@ U,S = Estimate_Hesssian(x0,jac=rosen_der,hessp=rosen_hess_prod)
 ```python
 # (2) Returned by function
 import numpy as np
-from ProbabilisticHessian import Estimate_Hessian
+from probabilistic_hessian import Estimate_Hessian
 from scipy.optimize import rosen,rosen_der,rosen_hess_prod
 
 x0=np.random.randn(5)
@@ -53,11 +53,12 @@ U,S = Estimate_Hesssian(x0,fun=rosen_complete,jac=True,hessp=True)
 
 ## Feedback
 
-If you have any questions or suggestions regarding this implementation, please open an issue in [fderoos/probabilistic_hessian](https://github.com/fderoos/probabilistic_hessian) or contact by email (mail to fderoos@tue.mpg.de).
+If you have any questions or suggestions regarding this implementation, please open an issue in [fderoos/probabilistic_hessian][repo] or contact by email (mail to fderoos@tue.mpg.de).
 
 ## Citation
 
-If you use the algorithm for your research, please cite the [article][1].
+If you use the algorithm for your research, please cite the [article][article].
 
 
-[1]: https://arxiv.org/abs/1705.07774
+[article]: https://github.com/fderoos/probabilistic_hessian "Available after publication"
+[repo]: https://github.com/fderoos/probabilistic_hessian
