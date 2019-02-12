@@ -1,1 +1,1 @@
-from .ProbabilisticHessian import Estimate_Hessian
+from .probabilistic_hessian import Estimate_Hessian
