@@ -25,7 +25,10 @@ from scipy.optimize import rosen_der,rosen_hess_prod
 
 x0=np.random.randn(5)
 
-U,S = Estimate_Hesssian(x0,jac=rosen_der,hessp=rosen_hess_prod)
+def rosen_der_noise(x):
+    return rosen_der(x)+np.random.randn(*x.shape)
+
+U,S = Estimate_Hesssian(x0,jac=rosen_der_noise,hessp=rosen_hess_prod)
 ```
 
 ```python
@@ -38,7 +41,7 @@ x0=np.random.randn(5)
 
 def rosen_complete(x,v=None):
     f = rosen(x)
-    g = rosen_der(x)
+    g = rosen_der(x)+np.random.randn(*x.shape)
     if v is None:
         return f, g
     else:
