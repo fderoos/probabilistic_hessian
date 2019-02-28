@@ -25,31 +25,36 @@ from scipy.optimize import rosen_der,rosen_hess_prod
 
 x0=np.random.randn(5)
 
-def rosen_der_noise(x):
-    return rosen_der(x)+np.random.randn(*x.shape)
+def rosen_grad(x):
+    g = rosen_der(x)
+    return g + 0.1 * np.random.randn(*g.shape)
+    
+def rosen_hessp(p,x):
+    return rosen_hess_prod(x,p)
 
-U,S = Estimate_Hesssian(x0,jac=rosen_der_noise,hessp=rosen_hess_prod)
+U,S = Estimate_Hesssian(jac=rosen_grad,hessp=rosen_hessp,x=x0)
 ```
 
 ```python
-# (2) Returned by function
+# (2) Collectively returned by function
 import numpy as np
 from probabilistic_hessian import Estimate_Hessian
 from scipy.optimize import rosen,rosen_der,rosen_hess_prod
 
 x0=np.random.randn(5)
 
-def rosen_complete(x,v=None):
-    f = rosen(x)
-    g = rosen_der(x)+np.random.randn(*x.shape)
+def rosen_complete(v=None,**kwargs):
+    f = rosen(**kwargs)
+    g = rosen_der(**kwargs)
+    g+= 0.1*np.random.randn(*g.shape)
     if v is None:
         return f, g
     else:
-        hv = rosen_hess_prod(x,v)
+        hv = rosen_hess_prod(p=v,**kwargs)
         return f, g, hv
 
 
-U,S = Estimate_Hesssian(x0,fun=rosen_complete,jac=True,hessp=True)
+U,S = Estimate_Hesssian(fun=rosen_complete,jac=True,hessp=True,x=x0)
 ```
 
 
@@ -63,5 +68,5 @@ If you have any questions or suggestions regarding this implementation, please o
 If you use the algorithm for your research, please cite the [article][article].
 
 
-[article]: https://github.com/fderoos/probabilistic_hessian "Available after publication"
+[article]: https://arxiv.org/abs/1902.07557 "Preprint"
 [repo]: https://github.com/fderoos/probabilistic_hessian
