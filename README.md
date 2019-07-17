@@ -54,7 +54,7 @@ def rosen_complete(v=None,**kwargs):
         return f, g, hv
 
 
-U,S = Estimate_Hesssian(fun=rosen_complete,jac=True,hessp=True,x=x0)
+U,S = Estimate_Hessian(fun=rosen_complete,jac=True,hessp=True,x=x0)
 ```
 
 
